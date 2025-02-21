@@ -1,27 +1,21 @@
-import { Route, Switch } from "react-router-dom";
-import DashboardRoutes from "./dashboardRoutes";
+import { Routes, Route } from "react-router-dom";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
 import NotFound from "@/pages/notfound";
 import { ROUTER } from "@/config/router";
-import PostDetail from "@/pages/post/PostDetail";
-import Post from "@/pages/post";
 
-const Routes = () => {
+const AppRoutes = () => {
   return (
-    <Switch>
-      <Route exact path={ROUTER.HOME} component={Home} />
-
-      <Route path={ROUTER.DASHBOARD}>
-        <Dashboard />
-        <DashboardRoutes />
+    <Routes>
+      <Route path={ROUTER.HOME} element={<Home />}>
+        <Route path={ROUTER.DASHBOARD} element={<Dashboard />} />
       </Route>
-      <Route exact path={ROUTER.POST} component={Post} />
-      <Route exact path={`${ROUTER.POST}/:id`} component={PostDetail} />
-
-      <Route component={NotFound} />
-    </Switch>
+      <Route path={ROUTER.LOGIN}>
+        <p>LOGIN</p>
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 
-export default Routes;
+export default AppRoutes;
